@@ -1,0 +1,7 @@
+myapp:
+  memo: 这是开发环境
+  owner: y
+
+spring:
+  profiles:
+    active: dev
