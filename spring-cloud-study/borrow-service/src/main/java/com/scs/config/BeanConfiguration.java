@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
+@LoadBalancerClient(name = "userservice", configuration = LoadBalancerConfig.class)
 public class BeanConfiguration {
     @Bean
     @LoadBalanced
