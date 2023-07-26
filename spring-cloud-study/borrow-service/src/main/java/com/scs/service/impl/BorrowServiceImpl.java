@@ -6,6 +6,8 @@ import com.scs.common.entity.User;
 import com.scs.entity.UserBorrowDetail;
 import com.scs.mapper.BorrowMapper;
 import com.scs.service.BorrowService;
+import com.scs.service.client.BookController;
+import com.scs.service.client.UserController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -22,11 +24,17 @@ public class BorrowServiceImpl implements BorrowService {
     @Autowired
     private BorrowMapper borrowMapper;
 
-    @Autowired
-    RestTemplate template;
+//    @Autowired
+//    RestTemplate template;
+
+//    @Autowired
+//    LoadBalancerClient loadBalancerClient;
 
     @Autowired
-    LoadBalancerClient loadBalancerClient;
+    private UserController userController;
+
+    @Autowired
+    private BookController bookController;
 
     @Override
     public UserBorrowDetail getUserBorrowDetailByUid(int uid) {
@@ -39,11 +47,20 @@ public class BorrowServiceImpl implements BorrowService {
 //        int port = instance.getPort();
 
 
-        User user = template.getForObject("http://userservice/user/" + uid, User.class);
+//        User user = template.getForObject("http://userservice/user/" + uid, User.class);
+//
+//        List<Book> bookList = borrowList.stream()
+//                .map(borrow ->
+//                        template.getForObject("http://bookservice/book/" + borrow.getBid(), Book.class))
+//                .collect(Collectors.toList());
+
+
+
+        User user = userController.getUserById(uid);
 
         List<Book> bookList = borrowList.stream()
                 .map(borrow ->
-                        template.getForObject("http://bookservice/book/" + borrow.getBid(), Book.class))
+                        bookController.getBookById(borrow.getBid()))
                 .collect(Collectors.toList());
 
         return new UserBorrowDetail(user, bookList);
