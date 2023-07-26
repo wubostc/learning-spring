@@ -1,0 +1,19 @@
+server:
+  port: 8802
+
+#spring:
+#  application:
+#    name: eureka02
+
+eureka:
+  instance:
+    hostname: eureka02
+  client:
+    # 高可用时，需要注册到其他eureka
+    register-with-eureka: true
+    # 我们本身是服务端，所以不需要再获取服务，false意味自己是注册中心
+    fetch-registry: false
+
+    service-url:
+      # 地址为另一个eureka
+      defaultZone: http://eureka01:8801/eureka

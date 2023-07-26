@@ -21,6 +21,7 @@
         <module>book-service</module>
         <module>borrow-service</module>
         <module>commons</module>
+        <module>eureka-server</module>
     </modules>
 
     <properties>
@@ -68,6 +69,17 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>2.3.1</version>
             </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <!-- for spring boot 2.6 - 2.7 -->
+                <version>2021.0.8</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

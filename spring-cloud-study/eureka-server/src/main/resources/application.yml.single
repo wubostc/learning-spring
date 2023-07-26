@@ -1,0 +1,12 @@
+server:
+  port: 8888
+
+eureka:
+  client:
+    # 自己不注册到eureka
+    register-with-eureka: false
+    # 我们本身是服务端，所以不需要再获取服务，false意味自己是注册中心
+    fetch-registry: false
+
+    service-url:
+      defaultZone: http://192.168.180.166:8888/eureka
