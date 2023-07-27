@@ -18,3 +18,10 @@ eureka:
 
   instance:
     prefer-ip-address: true
+
+
+feign:
+  circuitbreaker:
+    enabled: true
+#  hystrix:
+#    enabled: true

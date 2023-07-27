@@ -6,16 +6,11 @@ import com.scs.common.entity.User;
 import com.scs.entity.UserBorrowDetail;
 import com.scs.mapper.BorrowMapper;
 import com.scs.service.BorrowService;
-import com.scs.service.client.BookController;
-import com.scs.service.client.UserController;
+import com.scs.service.client.BookClient;
+import com.scs.service.client.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,10 +26,10 @@ public class BorrowServiceImpl implements BorrowService {
 //    LoadBalancerClient loadBalancerClient;
 
     @Autowired
-    private UserController userController;
+    private UserClient userController;
 
     @Autowired
-    private BookController bookController;
+    private BookClient bookController;
 
     @Override
     public UserBorrowDetail getUserBorrowDetailByUid(int uid) {

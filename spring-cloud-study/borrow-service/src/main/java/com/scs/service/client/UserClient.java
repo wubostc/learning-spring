@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import javax.validation.constraints.NotNull;
 
 
-@FeignClient("userservice")
+@FeignClient(value = "userservice", fallback = UserClientFallback.class)
 @Validated
-public interface UserController {
+public interface UserClient {
     @GetMapping("/user/{uid}")
     User getUserById(@PathVariable("uid")
                      @NotNull(message = "id 不能为空！！！")

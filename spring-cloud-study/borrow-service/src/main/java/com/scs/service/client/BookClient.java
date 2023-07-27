@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @FeignClient("bookservice")
-public interface BookController {
+public interface BookClient {
     @GetMapping("/book/{bid}")
     Book getBookById(@PathVariable("bid") Integer bid);
 }
