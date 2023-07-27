@@ -1,0 +1,27 @@
+server:
+  port: 8500
+
+spring:
+  main:
+    web-application-type: REACTIVE
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: borrow-service
+          uri: lb://borrowservice
+          predicates:
+            - Path=/borrow/** #, /borrow/** #访问这个路由就会跳转到上面到uri
+        - id: book-service
+          uri: lb://bookservice
+          predicates:
+            - Path=/book/**
+          filters:
+            - AddRequestHeader=x-request-color-is, blue #x-request-color-is: blue
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.180.166:8801/eureka,http://192.168.180.166:8802/eureka

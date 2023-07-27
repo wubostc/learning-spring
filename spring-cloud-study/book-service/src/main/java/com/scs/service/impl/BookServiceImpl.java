@@ -12,7 +12,7 @@ public class BookServiceImpl implements BookService {
     private BookMapper bookMapper;
 
     @Override
-    public Book getBookById(int bid) {
+    public Book getBookById(Integer bid) {
         return bookMapper.getBookById(bid);
     }
 }

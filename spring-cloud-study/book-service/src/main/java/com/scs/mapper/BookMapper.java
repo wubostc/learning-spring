@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface BookMapper {
     @Select("select * from BOOK where bid=#{bid}")
-    Book getBookById(@Param("bid") int bid);
+    Book getBookById(@Param("bid") Integer bid);
 }
