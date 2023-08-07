@@ -11,7 +11,9 @@ public enum MyBizError {
     PARAMS_VALIDATION_FAILED(1001),
 
     // 熔断异常
-    HYSTRIX_RUNTIME_EXCEPTION(2001);
+    HYSTRIX_RUNTIME_EXCEPTION(2001),
+    // sentinel限流
+    FLOW_LIMITING(2002);
 
     private Integer code;
 

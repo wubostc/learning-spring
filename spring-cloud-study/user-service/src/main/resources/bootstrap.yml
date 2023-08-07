@@ -1,0 +1,15 @@
+
+# nacos配置中心的 DataId 是由
+# spring.application.name + spring.profiles.active + cloud.nacos.config.file-extension 组成
+
+spring:
+
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      # nacos配置中心，使用 user-service-dev.yml 配置文件
+      config:
+        file-extension: yml
+        server-addr: localhost:8848
+        namespace: a8d80587-ac1a-4af6-b4bd-4b2cef4c91df

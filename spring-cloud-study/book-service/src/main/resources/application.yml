@@ -4,17 +4,60 @@ server:
 
 spring:
   application:
-    name: bookservice
+    name: book-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     #    url: jdbc:mysql://localhost:3306/springcloudstudy?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false&failOverReadOnly=false
     url: jdbc:mysql://localhost:3306/springcloudstudy?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false&failOverReadOnly=false
     username: root
     password: 12345678
+  cloud:
+    nacos:
+      discovery:
+        # nacos注册中心
+        server-addr: localhost:8848
+        namespace: a8d80587-ac1a-4af6-b4bd-4b2cef4c91df
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://192.168.180.166:8801/eureka,http://192.168.180.166:8802/eureka
-  instance:
-    prefer-ip-address: true
+    sentinel:
+      transport:
+        #sentinel监控地址
+        dashboard: localhost:8858
+
+
+seata:
+  enabled: true
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      server-addr: 127.0.0.1:8848
+      group : "SEATA_GROUP"
+      namespace: "a8d80587-ac1a-4af6-b4bd-4b2cef4c91df"
+#      username:
+#      password:
+  config:
+    type: nacos
+    nacos:
+      server-addr: 127.0.0.1:8848
+      group: "SEATA_GROUP"
+      namespace: "a8d80587-ac1a-4af6-b4bd-4b2cef4c91df"
+
+#  service:
+#    vgroup-mapping:
+#      #对应值"my_test_tx_group"即为事务分组名，
+#      #若不配置则默认以：spring.application.name值+"-seata-service-group"拼接后的字符串作为分组名
+#      book-service-seata-service-group: default
+#    grouplist:
+#      default: localhost:8091
+  tx-service-group: book-service-seata-service-group
+  enable-auto-data-source-proxy: true
+  data-source-proxy-mode: AT
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://192.168.180.166:8801/eureka,http://192.168.180.166:8802/eureka
+#  instance:
+#    prefer-ip-address: true
+
+
+

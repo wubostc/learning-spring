@@ -2,6 +2,7 @@ package com.scs.controller;
 
 import com.scs.common.entity.Book;
 import com.scs.service.BookService;
+import io.seata.core.context.RootContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,5 +27,20 @@ public class BookController {
         System.out.println("x-request-color-is = " + header);
 
         return bookService.getBookById(bid);
+    }
+
+
+    @GetMapping("/book/remain/{bid}")
+    public Integer bookRemain(@PathVariable("bid") Integer bid) {
+        return bookService.getRemain(bid);
+    }
+
+
+    @GetMapping("/book/borrow/{bid}")
+    public Boolean bookBorrow(@PathVariable("bid") Integer bid) {
+        System.out.println("RootContext.getXID() = " + RootContext.getXID());
+
+        Integer remain = bookService.getRemain(bid);
+        return bookService.setRemain(bid, remain - 1);
     }
 }
