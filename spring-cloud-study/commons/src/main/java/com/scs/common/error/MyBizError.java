@@ -1,11 +1,8 @@
 package com.scs.common.error;
 
-import com.sun.net.httpserver.Authenticator;
-
 public enum MyBizError {
-    SUCCESS(1),
+    SUCCESS(0),
     FAILURE(-1),
-
 
 
     PARAMS_VALIDATION_FAILED(1001),

@@ -6,27 +6,24 @@ import com.scs.common.entity.Book;
 import com.scs.common.entity.Borrow;
 import com.scs.common.entity.User;
 import com.scs.common.exception.MyBusinessException;
+import com.scs.dao.BorrowDao;
 import com.scs.entity.UserBorrowDetail;
-import com.scs.mapper.BorrowMapper;
 import com.scs.service.BorrowService;
-
 import com.scs.service.client.BookClient;
 import com.scs.service.client.UserClient;
 import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
 public class BorrowServiceImpl implements BorrowService {
     @Autowired
-    private BorrowMapper borrowMapper;
+    private BorrowDao borrowMapper;
 
 //    @Autowired
 //    LoadBalancerClient loadBalancerClient;
@@ -52,7 +49,6 @@ public class BorrowServiceImpl implements BorrowService {
 
         return new UserBorrowDetail(user, bookList);
     }
-
 
 
     // 流控替代方法，入参和返回值和之前的方法保持一致

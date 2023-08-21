@@ -2,6 +2,8 @@ package com.scs.advice;
 
 
 //import com.netflix.hystrix.exception.HystrixRuntimeException;
+
+import com.scs.common.error.MyBizError;
 import com.scs.common.exception.MyBusinessException;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
@@ -10,25 +12,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.util.NestedServletException;
 
-import javax.servlet.ServletException;
 import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import java.util.*;
 
 @ControllerAdvice
 @Slf4j
-public class MyControllerAdvice {
+public class MyControllerAdviceForFailure {
 
-    private String CODE = "code";
-    private String MSG = "msg";
-    private String TRACE_ID = "traceId";
+    static private final String CODE = "code";
+    static private final String MSG = "msg";
+    static private final String TRACE_ID = "traceId";
 
     @ExceptionHandler
     @ResponseBody
     public Map errorHandler(Exception e) {
-        Map map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         if (e instanceof MyBusinessException) {
             map.put(CODE, ((MyBusinessException) e).getCode());
             map.put(MSG, ((MyBusinessException) e).getMsg());
@@ -87,7 +87,7 @@ public class MyControllerAdvice {
 
 
         if (!map.containsKey(CODE)) {
-            map.put(CODE, -1);
+            map.put(CODE, MyBizError.FAILURE.getCode());
             if (e.getMessage() == null && e.getCause() != null) {
                 Throwable cause = e.getCause();
                 map.put(MSG, cause.getMessage());

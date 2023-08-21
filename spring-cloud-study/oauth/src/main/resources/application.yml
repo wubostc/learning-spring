@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+
+spring:
+  application:
+    name: borrow-service
+  security:
+    oauth2:
+      client:
+        registration:
+          # github oauth
+          github:
+            clientId: c809a5e57b70565aacea
+            clientSecret: 2eb571bcadac0333a03fa3bf5abd9ff854719038
+            redirectUri: http://localhost:8080/login/oauth2/code/github
+
+  
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      #    url: jdbc:mysql://localhost:3306/springcloudstudy?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=false&failOverReadOnly=false
+      url: jdbc:mysql://localhost:3306/springcloudstudy?serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=convertToNull&autoReconnect=true&useSSL=true&failOverReadOnly=false
+      username: root
+      password: 12345678
