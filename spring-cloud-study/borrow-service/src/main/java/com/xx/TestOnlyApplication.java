@@ -1,11 +1,13 @@
-package com.scs.gateway;
+package com.xx;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
-public class GatewayApplication {
+@SpringBootApplication()
+
+public class TestOnlyApplication {
     public static void main(String[] args) {
-        SpringApplication.run(GatewayApplication.class, args);
+        SpringApplication.run(TestOnlyApplication.class);
     }
 }
