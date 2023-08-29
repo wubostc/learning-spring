@@ -7,21 +7,35 @@ spring:
   application:
     name: gateway
   cloud:
+    nacos:
+      discovery:
+        # nacos注册中心
+        server-addr: 192.168.180.47:8848
+
+
+        # loadbalancer.nacos.enabled: true 表示，请求总是优先相同集群名 hangzhou
+        #        cluster-name: hangzhou
+        namespace: a8d80587-ac1a-4af6-b4bd-4b2cef4c91df
+
     gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
       routes:
         - id: borrow-service
-          uri: lb://borrowservice
+          uri: lb://borrow-service
           predicates:
             - Path=/borrow/** #, /borrow/** #访问这个路由就会跳转到上面到uri
         - id: book-service
-          uri: lb://bookservice
+          uri: lb://book-service
           predicates:
             - Path=/book/**
           filters:
             - AddRequestHeader=x-request-color-is, blue #x-request-color-is: blue
 
 
-eureka:
-  client:
-    service-url:
-      defaultZone: http://192.168.180.166:8801/eureka,http://192.168.180.166:8802/eureka
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://192.168.180.166:8801/eureka,http://192.168.180.166:8802/eureka

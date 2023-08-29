@@ -21,27 +21,33 @@ public class MyBusinessException extends RuntimeException {
 
 
     public MyBusinessException(MyBizError e) {
-        super(e.name());
+        super("[" +e.getCode() + "] " + e.name());
         this.code = e.getCode();
         this.msg = e.name();
     }
 
+    public MyBusinessException(MyBizError e, String message) {
+        super("[" +e.getCode() + "] " + message);
+        this.code = e.getCode();
+        this.msg = message;
+    }
+
     public MyBusinessException(Integer code, String message) {
-        super(message);
+        super("[" +code + "] " + message);
         this.code = code;
         this.msg = message;
         this.rid = "";
     }
 
     public MyBusinessException(Integer code, String message, Throwable cause) {
-        super(message, cause);
+        super("[" +code + "] " + message, cause);
         this.code = code;
         this.msg = message;
         this.rid = "";
     }
 
     public MyBusinessException(Integer code, String message, String rid, Throwable cause) {
-        super(message, cause);
+        super("[" +code + "] " + message, cause);
         this.code = code;
         this.msg = message;
         this.rid = rid;

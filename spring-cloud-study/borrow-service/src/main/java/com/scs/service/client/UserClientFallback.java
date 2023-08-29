@@ -9,10 +9,23 @@ import org.springframework.stereotype.Component;
 public class UserClientFallback implements UserClient {
     @Override
     public User getUserById(Integer id) {
-        throw new MyBusinessException(MyBizError.HYSTRIX_RUNTIME_EXCEPTION);
+
+        throw new MyBusinessException(MyBizError.FLOW_LIMITING, "The user-service is unavailable");
+
+        // 当user-service宕机后，返回替代方案
 //        User user = new User();
-//        user.setName("这是补救措施，userservice 已崩溃");
+//        user.setName("null");
 //        user.setUid(id);
 //        return user;
+    }
+
+    @Override
+    public Integer getRemain(Integer uid) {
+        return 0;
+    }
+
+    @Override
+    public Boolean userBorrow(Integer uid) {
+        return false;
     }
 }

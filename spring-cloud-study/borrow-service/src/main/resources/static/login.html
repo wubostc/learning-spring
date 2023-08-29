@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head></head>
+<body>
+<form method="post" action="/doLogin">
+    <label for="username">账号</label><input id="username" name="username"/>
+    <label for="password">密码</label><input id="password" name="password"/>
+    <img src="/vc.jpg" alt="正在加载验证码"/>
+    <label for="verifyCode">验证码</label><input id="verifyCode" name="verifyCode"/>
+    <button id="submit" type="submit">sign in</button>
+</form>
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+
+    var submit = document.getElementById("submit")
+
+    var eleUsername = document.getElementById('username')
+    var elePassword = document.getElementById('password')
+    var verifyCode = document.getElementById('verifyCode')
+
+    submit.addEventListener("click", (ev) => {
+        axios.post('/doLogin', {
+            uname: eleUsername.value,
+            passwd: elePassword.value,
+            verifyCode: verifyCode.value,
+          })
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+         ev.preventDefault()
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>
