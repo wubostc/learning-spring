@@ -4,14 +4,14 @@
 <mapper namespace="com.scs.dao.SecurityUserDao">
 
     <!-- 根据用户名查询用户信息   -->
-    <select id="loadUserByUsername" resultType="SecurityUser">
+    <select id="loadUserByUsername" resultType="com.scs.entity.SecurityUser">
         select id, username, password, enabled, accountNonExpired, accountNonLocked, credentialsNonExpired
         from security_user
         where username=#{username}
     </select>
 
     <!-- 根据用户 uid，查询用户角色   -->
-    <select id="getRolesByUid" resultType="SecurityRole">
+    <select id="getRolesByUid" resultType="com.scs.entity.SecurityRole">
         select id, name, name_zh
         from security_role t0
             where exists (

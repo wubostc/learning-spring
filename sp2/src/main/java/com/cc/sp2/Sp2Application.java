@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 
 public class Sp2Application {
 

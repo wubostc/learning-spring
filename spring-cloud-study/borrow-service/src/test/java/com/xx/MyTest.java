@@ -4,7 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.logging.LoggerFactory;
 import org.openjdk.jol.info.ClassLayout;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.Lifecycle;
+import org.springframework.context.SmartLifecycle;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpRequestFactory;
@@ -22,7 +26,23 @@ import java.util.concurrent.*;
 
 @SpringBootTest
 @Slf4j
-public class MyTest {
+public class MyTest implements Lifecycle {
+    ThreadPoolExecutor executor;
+
+    @Override
+    public void start() {
+        System.out.println("start");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("stop");
+    }
+
+    @Override
+    public boolean isRunning() {
+        return true;
+    }
 
 
     class User implements Serializable {
@@ -55,7 +75,7 @@ public class MyTest {
 //
 //        System.out.println(ClassLayout.parseInstance(user).toPrintable());
 
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(5, 20, 30,
+         executor = new ThreadPoolExecutor(5, 20, 30,
                 TimeUnit.SECONDS, new ArrayBlockingQueue<>(100),
                 new ThreadFactory() {
                     @Override

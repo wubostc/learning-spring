@@ -33,8 +33,8 @@ public class HelloController {
         System.out.println("授权信息：" + context.getAuthentication().getAuthorities());
         System.out.println("凭据：" + context.getAuthentication().getCredentials());
 
-        ThreadLocal threadLocal = new ThreadLocal();
-        threadLocal.set(1);
+//        ThreadLocal threadLocal = new ThreadLocal();
+//        threadLocal.set(1);
 
         System.out.println("------------------");
         new Thread(() -> {

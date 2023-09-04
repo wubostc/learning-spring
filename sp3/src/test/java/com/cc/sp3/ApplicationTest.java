@@ -705,13 +705,35 @@ class ApplicationTest {
 
 
 
+
+    @Test
+    void test21() throws InterruptedException {
+        Lock lock = new ReentrantLock();
+        lock.lock();
+
+
+        Thread.sleep(1000);
+
+        lock.unlock();
+
+    }
+
+
+
+
     @Test
     void contextLoads() throws InterruptedException {
+        ConcurrentHashMap<Object, Object> map = new ConcurrentHashMap<>();
+
+        new HashMap<>().put("key1", "value");
+
+        map.put("key1", "value");
+        //-XX:BiasedLockingStartupDelay=0 偏向锁将延迟改为0，
+		Thread.sleep(10000);
 
         Object o = new Object();
 
         System.out.println(ClassLayout.parseInstance(o).toPrintable());
-//		Thread.sleep(15000);
 //
 //		o.hashCode();
 //
@@ -722,15 +744,14 @@ class ApplicationTest {
             System.out.println(ClassLayout.parseInstance(o).toPrintable());
 
 
-            o.hashCode();
-
-            System.out.println(ClassLayout.parseInstance(o).toPrintable());
+            // sync中调用hashcode 升级为重量级锁
+//            o.hashCode();
+//
+//            System.out.println(ClassLayout.parseInstance(o).toPrintable());
         }
 
-        Thread thread = new Thread(() -> {
-            System.out.println("new thread" + ClassLayout.parseInstance(o).toPrintable());
-        });
-        thread.start();
+
+//        o.hashCode();
 
         System.out.println("done");
         System.out.println(ClassLayout.parseInstance(o).toPrintable());

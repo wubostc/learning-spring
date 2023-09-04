@@ -23,14 +23,14 @@ import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-@RestController
+//@RestController
 public class SecKillController implements BeanPostProcessor, InitializingBean {
     public static final String REDIS_LOCK = "redis_lock";
 
     @Autowired
     private StringRedisTemplate srt;
 
-    @Value("${server.port}")
+    @Value("${server.port:6379}")
     private String serverPort;
 
 

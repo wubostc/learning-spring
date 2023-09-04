@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
@@ -17,6 +18,8 @@ public class BorrowServiceApplication {
         System.setProperty(SecurityContextHolder.SYSTEM_PROPERTY, SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
 
 
-        SpringApplication.run(BorrowServiceApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(BorrowServiceApplication.class, args);
+
+        context.registerShutdownHook();
     }
 }

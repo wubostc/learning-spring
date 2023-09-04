@@ -13,7 +13,7 @@ import java.util.*;
 class JedisClusterTests {
 //	private JedisPooled jedis = new JedisPooled("127.0.0.1", 6379);
 
-	private JedisCluster jedis;
+	private final JedisCluster jedis;
 	{
 		Set<HostAndPort> s = new HashSet<>();
 		String host = "192.168.180.166";
@@ -28,8 +28,7 @@ class JedisClusterTests {
 	}
 
 	@Test void test01() {
-		System.out.println("""
-				jedis.get(hello) =\s""" + jedis.get("hello"));
+		System.out.println("jedis.get(hello) =" + jedis.get("hello"));
 
 		Map<String, String> map = new HashMap<>();
 		map.put("shanghai", "[121.480539, 31.235929]");
@@ -60,7 +59,7 @@ class JedisClusterTests {
 
 		if (it.hasNext()) {
 			String host = it.next();
-			var r = clusterNodes.get(host).getResource();
+			Connection r = clusterNodes.get(host).getResource();
 
 
 
@@ -77,17 +76,17 @@ class JedisClusterTests {
 			for (List<Object> list : result) {
 				List<Long> slots = new ArrayList<>(2);
 
-				var slotStart = (Long) list.get(0);
-				var slotEnd = (Long) list.get(1);
+				Long slotStart = (Long) list.get(0);
+				Long slotEnd = (Long) list.get(1);
 				slots.add(slotStart);
 				slots.add(slotEnd);
 
-				var node1 = (ArrayList<Object>)list.get(2);
-				var node2 = (ArrayList<Object>)list.get(3);
-				var host1 = new String((byte[]) node1.get(0));
-				var port1 = (Long) node1.get(1);
-				var host2 = new String((byte[]) node2.get(0));
-				var port2 = (Long) node2.get(1);
+				ArrayList<Object> node1 = (ArrayList<Object>)list.get(2);
+				ArrayList<Object> node2 = (ArrayList<Object>)list.get(3);
+				String host1 = new String((byte[]) node1.get(0));
+				Long port1 = (Long) node1.get(1);
+				String host2 = new String((byte[]) node2.get(0));
+				Long port2 = (Long) node2.get(1);
 
 				m.put(host1 + ":" + port1, slots);
 				m.put(host2 + ":" + port2, slots);

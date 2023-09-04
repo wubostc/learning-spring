@@ -50,13 +50,10 @@ public class MyControllerAdviceForSuccess implements ResponseBodyAdvice<Object> 
         }
 
 
-        if (body instanceof String) {
-            try {
-                return new JsonMapper().writeValueAsString(MyBizRespJson.success(body));
-            } catch (JsonProcessingException e) {
-                return e.getMessage();
-            }
-        }
+//        if (body instanceof String) {
+//                return new JsonMapper().writeValueAsString(MyBizRespJson.success(body));
+//            return body;
+//        }
 
         return body;
     }

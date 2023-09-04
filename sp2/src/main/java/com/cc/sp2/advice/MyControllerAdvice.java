@@ -1,14 +1,11 @@
 package com.cc.sp2.advice;
 
 import com.cc.sp2.exception.MyBusinessException;
-import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.ConstraintViolationException;
@@ -23,7 +20,7 @@ public class MyControllerAdvice {
     @ExceptionHandler
     @ResponseBody
     public Map errorHandler(Exception e) {
-        Map map = new HashMap<>();
+        Map<Object, Object> map = new HashMap<>();
         if (e instanceof MyBusinessException) {
             map.put("code", ((MyBusinessException) e).getCode());
             map.put("msg", ((MyBusinessException) e).getMsg());

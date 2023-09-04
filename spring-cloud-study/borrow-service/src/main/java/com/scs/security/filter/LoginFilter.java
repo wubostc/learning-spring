@@ -50,7 +50,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                 String username = (String) userInfo.get(getUsernameParameter());
                 String password = (String) userInfo.get(getPasswordParameter());
                 String verifyCode = (String) userInfo.get(getVerifyCodeKey());
-                String kaptcha = (String) request.getSession().getAttribute(KAPTCHA_KEY);
+                String kaptcha = (String) request.getSession(true).getAttribute(KAPTCHA_KEY);
 
                 if (ObjectUtils.isEmpty(userInfo) || ObjectUtils.isEmpty(password)) {
                     throw new MyAuthenticationException("账号/密码不能为空");
